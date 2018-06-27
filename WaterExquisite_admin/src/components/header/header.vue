@@ -13,31 +13,33 @@ import {
   mapState,
   mapActions
 } from 'vuex'
+
 export default {
-  data(){
-  },
-  props:['title'],
-  computed:{
-    isGoodManage(){
-      if(this.title === 'good'){
+  data() {},
+  computed: {
+    mapState({
+      title: state => state.title,
+    }),
+    isGoodManage() {
+      if (this.title === 'good') {
         return true
       }
       return false
     },
-    isOrderManaga(){
-      if(this.title === 'order'){
+    isOrderManaga() {
+      if (this.title === 'order') {
         return true
       }
       return false
     },
-    getTitle(){
-      if(this.title === 'good') {
+    getTitle() {
+      if (this.title === 'good') {
         return ''
       }
-      if(this.title === 'order') {
+      if (this.title === 'order') {
         return '订单管理'
       }
-      if(this.title === 'addGood') {
+      if (this.title === 'addGood') {
         return '添加商品'
       }
       return ''

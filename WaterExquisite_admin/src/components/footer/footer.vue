@@ -17,10 +17,15 @@
 </template>
 
 <script>
+import {
+  mapState,
+  mapActions
+} from 'vuex'
+
 export default {
   data() {},
-  props: ['title'],
   computed: {
+    title:mapState(['title']),
     isGoodManage() {
       if (this.title === 'good' || this.title === 'addGood') {
         return true
