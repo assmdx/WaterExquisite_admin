@@ -1,27 +1,29 @@
 <template lang="html">
-  <Header></Header>
-  <div class="mui-content" >
-    <Search></Search>
-    <ul v-for="{item,index} in goodList" v-bind="{_id:item._id}" id="OA_task_1" class="mui-table-view">
+  <div class="">
+    <Header></Header>
+    <div class="mui-content">
+      <br>
+      <Search></Search>
 
-				<li class="mui-table-view-cell mui-media mui-transitioning">
-					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-red" style="transform: translate(0px, 0px);">删除</a>
-					</div>
-					<div class="mui-slider-handle">
-						<a href="javascript:;">
-							<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-							<div class="mui-media-body">
-								幸福
-								<p class="mui-ellipsis">{item.info[0].goods_desc}</p>
-							</div>
-						</a>
-					</div>
-				</li>
-			</ul>
+      <ul v-for="(item,index) in goodList" :key="item._id" id="OA_task_1" class="mui-table-view">
+  				<li class="mui-table-view-cell mui-media mui-transitioning">
+  					<div class="mui-slider-right mui-disabled">
+  						<a class="mui-btn mui-btn-red" style="transform: translate(0px, 0px);">删除</a>
+  					</div>
+  					<div v-for="(itemImg,indexImg) in item.gallery" class="mui-slider-handle">
+  						<a v-if="indexImg === 0" href="javascript:;">
+                <img  class="mui-media-object mui-pull-left"  :src = "getFirstImg(indexImg)">
+  							<div class="mui-media-body">
+  								<p class="mui-ellipsis">{{item.info.name}}</p>
+  							</div>
+  						</a>
+  					</div>
+  				</li>
+  			</ul>
 
+    </div>
+    <Footer></Footer>
   </div>
-  <Footer></Footer>
 </template>
 
 <script>
@@ -37,16 +39,26 @@ export default {
   name: 'good',
   data() {
     return {
-      goodList: []
+      goodList: [Object]
     }
   },
   async created() {
-    if (this.title === 'good') {
-      this.goodList = await this.initializeData()
+    if (this.$store.state.title === 'good') {
+      // this.goodList = await this.initializeData()
+      this.initializeData().then(data => {
+        this.goodList = data.data.goodList
+      }).catch(e =>{
+        //网络出问题
+        console.log(e);
+        console.log('network is bad?');
+      })
     }
   },
   methods: {
-    ...mapActions(['initializeData'])
+    ...mapActions(['initializeData']),
+    getFirstImg(index){
+      return this.goodList[index].gallery[0]
+    }    
   },
   components: {
     Header,
@@ -54,7 +66,6 @@ export default {
     Footer,
   },
   computed: {
-
   }
 }
 </script>

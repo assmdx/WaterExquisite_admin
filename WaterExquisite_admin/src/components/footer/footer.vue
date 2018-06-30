@@ -1,6 +1,6 @@
 <template lang="html">
   <nav class="mui-bar mui-bar-tab">
-			<a class="mui-tab-item " v-bind:class="{mui-active:isGoodManage}" href="#tabbar">
+			<a :class="[ 'mui-tab-item',isGoodManage ? 'mui-active' : '' ]" href="#tabbar">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">商品管理</span>
 			</a>
@@ -8,7 +8,7 @@
 				<span class="mui-icon mui-icon-email"><span class="mui-badge">9</span></span>
 				<span class="mui-tab-label">消息</span>
 			</a>
-			<a class="mui-tab-item" v-bind:class="{mui-active:isOrderManaga}" href="#tabbar-with-contact">
+			<a :class="[ 'mui-tab-item',isOrderManage ? 'mui-active' : '' ]" href="#tabbar-with-contact">
 				<span class="mui-icon mui-icon-contact"></span>
 				<span class="mui-tab-label">订单管理</span>
 			</a>
@@ -23,15 +23,16 @@ import {
 } from 'vuex'
 
 export default {
-  data() {},
   computed: {
-    title:mapState(['title']),
+    title(){
+      return this.$store.state.title
+    },
     isGoodManage() {
       if (this.title === 'good' || this.title === 'addGood') {
         return true
       }
     },
-    isOrder() {
+    isOrderManage() {
       if (this.title === 'order') {
         return true
       }

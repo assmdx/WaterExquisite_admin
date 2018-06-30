@@ -9,8 +9,7 @@ export default {
     state
   }) {
     if (state.title === 'good') {
-      let goodList = await ajax('POST',GoodsList)
-      return goodList
+      return ajax('POST',GoodsList)
     } else if (state.title === 'order') {
       let orderList = await ajax('POST',OrderList)
       return orderList

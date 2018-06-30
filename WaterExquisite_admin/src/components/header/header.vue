@@ -1,8 +1,7 @@
 <template lang="html">
     <header class="mui-bar mui-bar-nav">
 			<a class="mui-icon mui-icon-bars mui-pull-left mui-plus-visible"></a>
-			<a id="info" class="mui-icon mui-icon-info-filled mui-pull-right" style="color: #999;"></a>
-			<h1 class="mui-title">水玲珑{getTitle}</h1>
+			<h1 class="mui-title">{{getTitle}}</h1>
       <a v-if="isGoodManage"><span class="mui-icon mui-icon-plusempty" style="position:absolute;right:20px"></span></a>
       <a v-if="isOrderManaga"><span class="mui-icon mui-icon mui-icon-bars" style="position:absolute;right:20px"></span></a>
 		</header>
@@ -15,11 +14,10 @@ import {
 } from 'vuex'
 
 export default {
-  data() {},
   computed: {
-    mapState({
-      title: state => state.title,
-    }),
+    title(){
+      return this.$store.state.title
+    },
     isGoodManage() {
       if (this.title === 'good') {
         return true
@@ -34,13 +32,13 @@ export default {
     },
     getTitle() {
       if (this.title === 'good') {
-        return ''
+        return '水玲珑'
       }
       if (this.title === 'order') {
-        return '订单管理'
+        return '水玲珑订单管理'
       }
-      if (this.title === 'addGood') {
-        return '添加商品'
+      if (this.title === 'addGood') { 
+        return '水玲珑添加商品'
       }
       return ''
     }
