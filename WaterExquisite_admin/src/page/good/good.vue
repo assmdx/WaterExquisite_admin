@@ -58,7 +58,7 @@ export default {
     ...mapActions(['initializeData']),
     getFirstImg(index){
       return this.goodList[index].gallery[0]
-    }    
+    }
   },
   components: {
     Header,
