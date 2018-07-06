@@ -14,7 +14,6 @@ export default {
     }
   },
   addGood({commit,state}){
-    //??????
     return ajax('POST',GoodAdd)
   }
 }

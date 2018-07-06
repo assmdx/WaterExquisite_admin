@@ -6,7 +6,7 @@ export default [{
     component: App,
     children: [{
         path: '',
-        component: r => require.ensure([], () => r(require('../page/good/good')), 'good'),
+        component: r => require.ensure([], () => r(require('../page/good/children/addGood')), 'good'),
         children: [{
           path: '/addGood',
           component: r => require.ensure([], () => r(require('../page/good/children/addGood')), 'addGood')
