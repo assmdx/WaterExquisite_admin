@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
-    <Header></Header>
-    <div class="mui-content">
+    <Header @gotoAddGood="gotoAddGood"></Header>
+    <div v-if="$store.state.title === 'good'" class="mui-content">
       <br>
       <Search></Search>
 
@@ -58,6 +58,10 @@ export default {
     ...mapActions(['initializeData']),
     getFirstImg(index){
       return this.goodList[index].gallery[0]
+    },
+    gotoAddGood(){
+      this.$store.commit('GOTO_ADDGOOD')
+      this.$router.push({path:'addGood'})
     }
   },
   components: {

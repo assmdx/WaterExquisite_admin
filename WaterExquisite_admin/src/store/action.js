@@ -1,4 +1,5 @@
 import ajax from '../config/ajax'
+
 import {
   GoodsList,
   OrderList,
@@ -12,8 +13,5 @@ export default {
       let orderList = await ajax('POST',OrderList)
       return orderList
     }
-  },
-  addGood({commit,state}){
-    return ajax('POST',GoodAdd)
   }
 }
