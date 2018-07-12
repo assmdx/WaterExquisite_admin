@@ -21,22 +21,22 @@
 						<input type="text" class="mui-input-clear" placeholder="商品数量" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
 					</div>
 					<div class="mui-input-row" style="margin: 10px 5px;">
-						<textarea id="textarea" rows="20" placeholder="商品描述"></textarea>
+						<textarea id="textarea" rows="2" placeholder="商品描述"></textarea>
 					</div>
 
-
+          <input @change="fileChange($event)" id = "upload_file" style="position: absolute; left: 0;top:200; opacity: 0;" accept="image/*" type="file" name="licence_image" multiple>
           <div class="mui-content-padded">
-						<input @change="fileChange($event)" id = "upload_file" style="position: absolute; left: 0;top: 200; opacity: 0;" accept="image/*" type="file" name="licence_image" multiple>
 						<a><span class="mui-icon mui-icon-camera" style="color:#777">
 						</span></a>
 					</div>
+
+
 					<ul class="mui-table-view mui-grid-view mui-grid-9" id="image_list"></ul>
-					<div style = "display: none;margin: 5px auto;width: 90%;">
-						<h5 style="background-color:#efeff4">上传的图片为：</h5>
+					<div style = "margin: 5px auto;width: 90%;">						
 						<ul class="mui-table-view mui-grid-view" >
               <li v-for="(item,index) in gallery" class="mui-table-view-cell mui-media mui-col-xs-6">
 		            <a href="#">
-		                <img class="mui-media-object" src="item">
+		                <img class="mui-media-object" :src="item">
                 </a>
               </li>
             </ul>
@@ -59,7 +59,8 @@
 <script>
 import Header from '../../../components/header/header'
 import Footer from '../../../components/footer/footer'
-import '../../../assets/js/html5ImgCompress.min.js'
+import ImageCompressor from 'image-compressor.js'
+
 import {
   mapState,
   mapActions
@@ -84,7 +85,14 @@ export default {
     Header,
     Footer,
   },
+  created(){
+
+  },
   methods: {
+    clickUploadImage(){
+      console.log('clickUploadImage is touched');
+      document.getElementById('upload_file').click();
+    },
     publishGood(){
       this.addGood.then(data => {
 
@@ -93,30 +101,23 @@ export default {
       })
     },
     fileChange(el){
-      new html5ImgCompress(el.target.files[0], {
-        before: function(file) {
-          console.log('压缩前...');
-          this.gallery.push(file)
-          // 这里一般是对file进行filter，例如用file.type.indexOf('image') > -1来检验是否是图片
-          // 如果为非图片，则return false放弃压缩（不执行后续done、fail、complete），并相应提示
-        },
-        done: function(file, base64) {
-          console.log('压缩成功...');
-          console.log(typeof this.gallery);
-          // ajax和服务器通信上传base64图片等操作
-          this.gallery.push(file)
-        },
-        fail: function(file) {
-          console.log('压缩失败...');
-        },
-        complete: function(file) {
-          console.log('压缩完成...');
-        },
-        notSupport: function(file) {
-          console.log('浏览器不支持！')
-          // 不支持操作，例如PC在这里可以采用swfupload上传
-        }
-      })
+      let that = this
+      const imageCompressor = new ImageCompressor()
+      for(let i = 0; i < el.target.files.length;i++){
+        // that.gallery.push(el.target.files[i])
+        imageCompressor.compress(el.target.files[i],{
+          quality:0.6,
+          convertSize:1000000
+        }).then((result) => {
+          let reader = new FileReader();
+          reader.readAsDataURL(result);
+          reader.onloadend = function(){
+            that.gallery.push(reader.result);
+          }
+        }).catch((e)=>{
+            console.log('compress image error:',e);
+        })
+      }
     }
   }
 }
