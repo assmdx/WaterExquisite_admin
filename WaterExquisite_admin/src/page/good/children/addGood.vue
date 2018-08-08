@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
     <Header></Header>
-    <div class="mui-content" >
+    <div class="mui-content" style="padding-bottom: 50px">
 		    <div class="mui-content-padded" style="margin:0px;">
 		    	<form class="mui-input-group">
 					<div class="mui-input-row">
@@ -27,20 +27,20 @@
 					</div>
 
           <div class="mui-content">
-            <div class="mui-content-padded">
+            <div class="mui-content-padded" style="margin: 0px">
               <p v-for="(item,index) in good.gallery" >
                 <img :src="item" alt="" style="">
               </p>
             </div>
-          </div>
-
-          <div class="mui-button-row">
-            <button type="button" class="mui-btn mui-btn-success" >预览</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" @click = "publishGood" class="mui-btn mui-btn-primary" >发布</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" class="mui-btn mui-btn-danger"  >取消</button>
+            <div class="mui-content-padded">
+              <div class="mui-button-row">
+                <button type="button" class="mui-btn mui-btn-success" >预览</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" @click = "publishGood" class="mui-btn mui-btn-primary" >发布</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="mui-btn mui-btn-danger"  >取消</button>
+              </div>
+            </div>
           </div>
 				</form>
-
 		    </div>
 		</div>
 
