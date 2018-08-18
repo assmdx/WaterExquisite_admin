@@ -1,5 +1,6 @@
 <template lang="html">
     <header class="mui-bar mui-bar-nav">
+      <a v-if="isGoodAdd" v-on:click="gotoGood()" class="mui-icon mui-icon-left-nav"></a>
 			<a class="mui-icon mui-icon-bars mui-pull-left mui-plus-visible"></a>
 			<h1 class="mui-title">{{getTitle}}</h1>
       <!-- <a v-if="isGoodManage"><span class="mui-icon mui-icon-plusempty" style="position:absolute;right:20px"></span></a> -->
@@ -18,6 +19,12 @@ export default {
   computed: {
     title(){
       return this.$store.state.title
+    },
+    isGoodAdd(){
+      if (this.title === 'addGood') {
+        return true
+      }
+      return false
     },
     isGoodManage() {
       if (this.title === 'good') {
@@ -46,9 +53,12 @@ export default {
   },
   methods:{
     gotoAddGood:function(){
-      this.$emit('gotoAddGood')
+      this.$emit('gotoAddGood');
       // this.$store.commit('GOTO_ADDGOOD')
       // this.$router.push({path:'/addGood'})
+    },
+    gotoGood:function(){
+      this.$emit('gotoGood');
     }
   }
 }

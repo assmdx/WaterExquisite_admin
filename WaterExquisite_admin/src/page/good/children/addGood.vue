@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <Header></Header>
+    <Header @gotoGood="gotoGood"></Header>
     <div class="mui-content" style="padding-bottom: 50px">
       <div class="mui-content-padded" style="margin:0px;">
         <form class="mui-input-group">
@@ -102,6 +102,11 @@
       clickUploadImage() {
         console.log('clickUploadImage is touched');
         document.getElementById('upload_file').click();
+      },
+      gotoGood() {
+        console.log('receive emit go to good on addGood.vue');
+        this.$store.commit('GOTO_GOOD');
+        this.$router.push({path: '/'});
       },
       publishGood() {
         let that = this;

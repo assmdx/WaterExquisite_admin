@@ -11,12 +11,14 @@ export default {
 	/*状态转变为添加商品
 	*/
 	[GOTO_ADDGOOD](state){
+	  console.log('state has beeen changed to addgood')
 		state.title = 'addGood'
 	},
 
   /*状态转变为添加商品
     */
   [GOTO_GOOD](state){
+    console.log('state has beeen changed to good')
     state.title = 'good'
   }
 }

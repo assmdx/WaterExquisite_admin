@@ -15,6 +15,10 @@ export default [{
       {
         path: '/addGood',
         component: r => require.ensure([], () => r(require('../page/good/children/addGood')), 'addGood')
+      },
+      {
+        path:'/message',
+        component:r => require.ensure([],()=> r(require('../page/order/order')),'message')
       }
     ]
 }]
