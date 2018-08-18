@@ -61,7 +61,7 @@
 
   import {
     GoodsList,
-    OrderList,
+    // OrderList,
     GoodAdd,
     addImage,
     getImage,
