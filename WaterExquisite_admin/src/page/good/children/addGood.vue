@@ -110,6 +110,14 @@
       },
       publishGood() {
         let that = this;
+        if(that.good.number === 0) {
+          swal("商品数量不能为0!", {
+            icon:"error",
+            buttons:false,
+            timer:1000
+          });
+          return ;
+        }
         axios.post(GoodAdd, that.good).then(dataRes => {
           swal("发布成功!", {
             buttons: false,
