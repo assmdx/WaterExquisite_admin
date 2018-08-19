@@ -13,7 +13,7 @@
           </div>
           <div v-for="(itemImg,indexImg) in item.gallery" class="mui-slider-handle">
             <a v-if="indexImg === 0" href="javascript:;">
-              <img class="mui-media-object mui-pull-left" :src="getFirstImg(indexImg)">
+              <img class="mui-media-object mui-pull-left" :src="item.thumb">
               <div class="mui-media-body">
                 <p class="mui-ellipsis">{{item.info.name}}</p>
               </div>
@@ -63,9 +63,6 @@
     },
     methods: {
       ...mapActions(['initializeData']),
-      getFirstImg(index) {
-        return this.goodList[index].gallery[0]
-      },
       gotoAddGood() {
         this.$store.commit('GOTO_ADDGOOD')
         this.$router.push({path: 'addGood'})
