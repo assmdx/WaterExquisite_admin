@@ -165,23 +165,27 @@
         let that = this
         const imageCompressor = new ImageCompressor()
         //得到商品的缩略图
-        imageCompressor.compress(el.target.files[0], {
-          width: 128,
-          height: 128
-        }).then(async (result) => {
-          let urlList = await that.uploadGoodImages(result);
-          console.log(urlList);
-          if(urlList.data){
-            if(urlList.data.result.length >0){
-              that.good.thumb = getImage+ '/' + urlList.data.result[0];
+        if(that.good.thumb === ""){
+          //先判断是不是已经生成缩略图了
+          imageCompressor.compress(el.target.files[0], {
+            width: 128,
+            height: 128
+          }).then(async (result) => {
+            let urlList = await that.uploadGoodImages(result);
+            console.log(urlList);
+            if(urlList.data){
+              if(urlList.data.result.length >0){
+                that.good.thumb = getImage+ '/' + urlList.data.result[0];
+              }
+              else {
+                console.warn('uplaod file failed and get thumb failed!');
+              }
             }
-            else {
-              console.warn('uplaod file failed and get thumb failed!');
-            }
-          }
-        }).catch((e) => {
-          console.error(e);
-        });
+          }).catch((e) => {
+            console.error(e);
+          });
+        }
+
 
         //压缩商品图片
         let compressedImages = [];
