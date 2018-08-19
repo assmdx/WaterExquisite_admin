@@ -208,9 +208,14 @@
         console.log('urlList is ',urlList);
         if(urlList){
           if(urlList.data.result.length >0){
+            let goodDesc ='<div>';
             urlList.data.result.forEach(imgUrl=>{
+              goodDesc = goodDesc + `<img src="${getImage}/${imgUrl}">`
               that.good.gallery.push(getImage + "/" + imgUrl);
             });
+            //加入到商品描述中
+            goodDesc = goodDesc + `</div>`;
+            that.good.info.goods_desc = goodDesc;
           }
           else {
             console.warn('uplaod file failed and get thumb failed!');
